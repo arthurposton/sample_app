@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
+gem 'execjs'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -8,12 +9,14 @@ gem 'rails', '3.2.13'
 # Gems used in development only.
 group :development do
   gem 'sqlite3'
-  gem 'rspec-rails', '2.0.1'
+#  gem 'rspec-rails', '2.0.1'
+  gem "rspec-rails", "~> 2.8"
 end
 
 # Gems used for test environment only.
 group :test do
-  gem 'rspec-rails', '2.0.1'
+#  gem 'rspec-rails', '2.0.1'
+  gem "rspec-rails", "~> 2.8"
   gem 'webrat', '0.7.1'
 end
   
