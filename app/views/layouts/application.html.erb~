@@ -3,8 +3,7 @@
   <head>
     <title>
       Ruby on Rails Tutorial Sample App | <%= @title%>
-    <%= csrf_meta_tag %>
-    </title>   
+    </title>
   </head>
   <body>
     <%= yield %>
