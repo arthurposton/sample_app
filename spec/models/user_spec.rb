@@ -13,7 +13,7 @@ require 'spec_helper'
 
   describe User do
   
-  before { @user = User.new(name: "Example User", email: "user@example.com") }
+#  before { @user = User.new(name: "Example User", email: "user@example.com") }
 
   subject { @user }
 
@@ -118,6 +118,7 @@ require 'spec_helper'
       end
       
       describe "has_password? method" do
+	
 	it "should be true if the passwords match" do
 	  @user.has_password?(@attr[:password]).should be_true
 	end
