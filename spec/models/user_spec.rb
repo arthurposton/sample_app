@@ -9,24 +9,19 @@
 #  updated_at :datetime         not null
 #
 
-require 'spec_helper'
+  require 'spec_helper'
 
   describe User do
   
-#  before { @user = User.new(name: "Example User", email: "user@example.com") }
-
-  subject { @user }
-
-  it { should respond_to(:name) }
-  it { should respond_to(:email) }
   
-  before(:each) do
-    @attr = {:email => "user@example.com", 
-             :name =>"Example User",
-             :password => "foobar",
-             :password_confirmation => "foobar"
-            }
-  end
+    before(:each) do
+    @attr = { 
+      :name => "Example User",
+      :email => "user@example.com",
+      :password => "foobar",
+      :password_confirmation => "foobar"
+      }
+    end
   
     it "should create a new instance giving valid attributes" do
       User.create!(@attr)
