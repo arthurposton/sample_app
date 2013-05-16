@@ -4,7 +4,7 @@ gem 'rails', '3.2.13'
 gem 'bootstrap-sass', '2.1'
 gem 'execjs'
 gem 'gravatar_image_tag', '0.1.0'
-#gem 'will_paginate', '3.0.pre2'
+gem 'will_paginate', '3.0.pre2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
