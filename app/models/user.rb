@@ -15,6 +15,14 @@ class User < ActiveRecord::Base
   
   
   has_many :microposts, :dependent => :destroy
+  has_many :relationships, :dependent => :destroy,
+                           :foreign_key => "follower_id"
+  has_many :reverse_relationships, :foreign_key => "followed_id",
+				   :class_name => "Relationship",
+				   :dependent => :destroy
+  has_many :followers, :through => :reverse_relationships,
+				   :source => :follower
+  has_many :following, :through => :relationships, :source => :followed
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
@@ -25,7 +33,7 @@ class User < ActiveRecord::Base
 		    :uniqueness => { :case_sensitive => false }
   
   # Automatically create the virtual attribute "password_confirmation".
-  validates :password, :presence	=> true,
+  validates :password,  :presence	=> true,
 			:confirmation	=> true,
 			:length		=> { :within => 6..40}
   
@@ -40,7 +48,19 @@ class User < ActiveRecord::Base
   
   def feed
     # This is preliminary. See Chapter 12 for the full implentation.
-    Micropost.where("user_id = ?", id)
+    Micropost.from_users_followed_by(self)
+  end
+  
+  def following?(followed)
+    relationships.find_by_followed_id(followed)
+  end
+    
+  def follow!(followed)
+    relationships.create!(:followed_id => followed.id)
+  end
+    
+  def unfollow!(followed)
+    relationships.find_by_followed_id(followed).destroy
   end
   
   class << self
@@ -52,7 +72,8 @@ class User < ActiveRecord::Base
     def authenticate_with_salt(id, cookie_salt)
       user = find_by_id(id)
       (user && user.salt == cookie_salt) ? user : nil
-    end
+    end    
+    
   end
   
   private

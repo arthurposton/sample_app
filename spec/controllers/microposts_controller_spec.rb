@@ -25,7 +25,7 @@ describe MicropostsController do
     describe "failure" do
       
       before(:each) do
-	@attr = [ :content => "" }
+	@attr = { :content => "" }
       end
       
       it "should not create a micropost" do
@@ -34,7 +34,7 @@ describe MicropostsController do
 	end.should_not change(Micropost, :count)
       end
       
-      it "should re-render the home page" do
+      it "should render the home page" do
 	post :create, :micropost => @attr
 	response.should render_template('pages/home')
       end
@@ -71,7 +71,7 @@ describe MicropostsController do
 	       
       before(:each) do
 	@user = Factory(:user)
-	wrong_user = Factory(:user, :email => Factory.next(:email)))
+	wrong_user = Factory(:user, :email => Factory.next(:email))
 	test_sign_in(wrong_user)
 	@micropost = Factory(:micropost, :user => @user)
       end
